@@ -8,7 +8,15 @@ from email.mime.text import MIMEText
 
 
 def GetCountRecords(client, from_date, to_date, query = None):
+    """
+    Get the number of records (documents) from a date range
     
+    :param elasticsearch.client client: The elasticsearch client to use for the search 
+    :param str from_date: The from date.  It can be lucene date math, such as 'now-1d' for yesterday
+    :param str to_date: The to date.  Can also use lucene date math.
+    :query str query: Query string to limit the documents searched.
+    :return: The total documents
+    """
     s = Search(using=client, index='gracc-osg-*') \
         .filter('range', **{'@timestamp': {'from': from_date, 'to': to_date}}) \
         .params(search_type="count")
