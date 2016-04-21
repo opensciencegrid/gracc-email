@@ -5,6 +5,7 @@ from elasticsearch_dsl import Search, A
 from tabulate import tabulate
 import smtplib
 from email.mime.text import MIMEText
+import locale
 
 
 def GetCountRecords(client, from_date, to_date, query = None):
@@ -27,6 +28,10 @@ def GetCountRecords(client, from_date, to_date, query = None):
 def ReportNumRecords(es):
     """
     Report the total records in the collector in a readable table
+    
+    :param elasticsearch.client client: The elasticsearch client to use for the search
+    :return: A tuple - (text_report str, num_todays_records int, num_yesterday_records int)
+    
     """
     toReturn = ""
     
@@ -38,8 +43,8 @@ def ReportNumRecords(es):
     # Print the total 
     headers = ["Yesterday", "Today", "Delta"]
     toReturn += "Total records:\n"
-    toReturn += tabulate([[today_records, yesterday_records, delta]], headers, tablefmt='grid')
-    return toReturn
+    toReturn += tabulate([[yesterday_records, today_records, delta]], headers, tablefmt='grid')
+    return (toReturn, today_records, yesterday_records)
 
 def ReportPerProbe(es):
     """
@@ -120,7 +125,12 @@ def main():
         email_body += json.dumps(health, sort_keys = True, indent=4, separators=(',', ': '))
     
     # Report the total number of records
-    email_body += ReportNumRecords(es)
+    (text_report, today_records, yesterday) = ReportNumRecords(es)
+    email_body += text_report
+    
+    locale.setlocale(locale.LC_ALL, 'en_US')
+    pretty_records = locale.format("%d", today_records, grouping=True)
+    subject += " - %s Records processed today" % pretty_records
     
     # A divider
     email_body += "\n" + ("-" * 75) + "\n"
