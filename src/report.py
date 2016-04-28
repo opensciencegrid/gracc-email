@@ -94,7 +94,7 @@ def ReportPerProbe(es):
         data.append(tmp_data)
     
     # Sort the data by probename
-    data = sorted(data, key=lambda el: el[0])
+    data.sort(key=lambda el: el[0])
     
     headers = ["ProbeName", "Yesterday Records", 'Today Records', 'Delta']
     toReturn +=  "Records by Probe:\n"
