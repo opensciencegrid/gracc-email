@@ -8,6 +8,7 @@ from tabulate import tabulate
 import smtplib
 from email.mime.text import MIMEText
 import locale
+import datetime
 
 
 def GetCountRecords(client, from_date, to_date, query = None):
@@ -92,6 +93,9 @@ def ReportPerProbe(es):
         tmp_data.extend(v)
         data.append(tmp_data)
     
+    # Sort the data by probename
+    data = sorted(data, key=lambda el: el[0])
+    
     headers = ["ProbeName", "Yesterday Records", 'Today Records', 'Delta']
     toReturn +=  "Records by Probe:\n"
     toReturn += tabulate(data, headers=headers, tablefmt='grid')
@@ -108,6 +112,8 @@ def add_args(parser):
 
 
 def main():
+    
+    before = datetime.datetime.now()
     
     # Parse the arguments to the script
     parser = argparse.ArgumentParser(description='Report the local collector state to email')
@@ -140,6 +146,12 @@ def main():
     # Report the per-probe information
     email_body += ReportPerProbe(es)
     
+    # Calculate and report the time it took to generate the email
+    after = datetime.datetime.now()
+    difference = after - before
+    email_body += "\n\n"
+    email_body += "Took %i seconds to generate email." % (difference.seconds)
+    
     # Create the email
     msg = MIMEText("<pre style=\"font-size:small\">" + email_body + "</pre>", 'html')
     msg['Subject'] = subject
@@ -152,10 +164,6 @@ def main():
     
     s.quit()
     
-    
-
-
-
 
 
 if __name__ == "__main__":
