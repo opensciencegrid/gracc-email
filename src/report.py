@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 import math
 import argparse
@@ -114,7 +114,7 @@ def main():
     add_args(parser)
     args = parser.parse_args()
     
-    es = elasticsearch.Elasticsearch()
+    es = elasticsearch.Elasticsearch(timeout=60)
     email_body = ""
     
     cluster = elasticsearch.client.ClusterClient(es)
