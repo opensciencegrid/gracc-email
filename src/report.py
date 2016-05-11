@@ -9,7 +9,7 @@ import smtplib
 from email.mime.text import MIMEText
 import locale
 import datetime
-
+import json
 
 def GetCountRecords(client, from_date, to_date, query = None):
     """
