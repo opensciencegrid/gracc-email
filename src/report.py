@@ -130,7 +130,10 @@ def main():
     else:
         subject = "GRACC collector status: %s" % health['status']
         # Prefix the email with the health status
+        email_body += "Health Report:\n"
         email_body += json.dumps(health, sort_keys = True, indent=4, separators=(',', ': '))
+        # A divider
+        email_body += "\n" + ("-" * 75) + "\n"
     
     # Report the total number of records
     (text_report, today_records, yesterday) = ReportNumRecords(es)
