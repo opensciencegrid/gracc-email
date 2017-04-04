@@ -21,12 +21,11 @@ def GetCountRecords(client, from_date, to_date, query = None):
     :query str query: Query string to limit the documents searched.
     :return: The total documents
     """
-    s = Search(using=client, index='gracc.osg.raw0-*') \
-        .filter('range', **{'@timestamp': {'from': from_date, 'to': to_date}}) \
-        .params(search_type="count")
+    s = Search(using=client, index='gracc.osg.raw-*') \
+        .filter('range', **{'@timestamp': {'from': from_date, 'to': to_date}})
 
-    response = s.execute()
-    return response.hits.total
+    response = s.count()
+    return response
 
 def ReportNumRecords(es):
     """
@@ -57,8 +56,8 @@ def ReportPerProbe(es):
     toReturn = ""
     
     # Create the search and aggreagations (A)
-    s = Search(using=es, index='gracc.osg.raw0-*')
-    a = A('terms', field='ProbeName', size=0)
+    s = Search(using=es, index='gracc.osg.raw-*')
+    a = A('terms', field='ProbeName', size=(2**31)-1)
 
     s.aggs.bucket('day_range', 'range', field='@timestamp',
         ranges = [
