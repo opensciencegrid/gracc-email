@@ -5,3 +5,4 @@ six==1.10.0
 tabulate==0.7.7
 urllib3==1.20
 wsgiref==0.1.2
+toml
