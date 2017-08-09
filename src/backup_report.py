@@ -100,10 +100,10 @@ def main():
         detailed_files += "\n\n"
 
     email_body = ""
-    email_body += tabulate(data, headers=headers, tablefmt='grid')
+    email_body += tabulate(data, headers=headers, tablefmt='grid') 
 
     # A divider     
-    email_body += "\n" + ("-" * 75) + "\n"
+    email_body += "\n\n" + ("-" * 75) + "\n\n"
 
     email_body += detailed_files
 
