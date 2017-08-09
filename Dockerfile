@@ -1,4 +1,4 @@
-FROM opensciencegrid/osg-wn
+FROM opensciencegrid/osg-wn:3.4-el6
 
 RUN yum -y install python-setuptools
 
