@@ -1,9 +1,11 @@
 #!/bin/sh
 
+# $1 - email to send report
+
 # Create a proxy for gfal, because it segfaults with the normal certs
 grid-proxy-init -cert /hostcert.pem -key /hostkey.pem
 
 
 # Run the actual command
-backup_report -c /test.toml djw8605@gmail.com
+backup_report -c /test.toml $1
 

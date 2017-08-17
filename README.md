@@ -58,7 +58,7 @@ GRACC Backup Report
 
 The GRACC backup report can be run within Docker.  It needs a hostcert.pem and hostkey.pem in order to make the proxy and communicate with the remote servers.  A valid command would be:
 
-    sudo docker run --rm -i -t --net=host -v /etc/grid-security/hostcert.pem:/hostcert.pem -v /etc/grid-security/hostkey.pem:/hostkey.pem run_backup_report
+    sudo docker run --rm -i -t --net=host -v /etc/grid-security/hostcert.pem:/hostcert.pem -v /etc/grid-security/hostkey.pem:/hostkey.pem run_backup_report <email>
 
 
 License
