@@ -22,7 +22,8 @@ setup(name='gracc-email',
             'console_scripts': [
                   'backup_report = gracc_email.backup_report:main'
             ]
-      }
+      },
+      scripts=['run_backup_report']
 )
 
 
