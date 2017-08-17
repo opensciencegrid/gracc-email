@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Create a proxy for gfal, because it segfaults with the normal certs
-grid-proxy-init -cert /etc/grid-security/gracc.opensciencegrid.org-cert.pem -key /etc/grid-security/gracc.opensciencegrid.org-key.pem -out /etc/grid-security/gracc.opensciencegrid.org-proxy.pem
+grid-proxy-init -cert /hostcert.pem -key /hostkey.pem
 
 
 # Run the actual command
