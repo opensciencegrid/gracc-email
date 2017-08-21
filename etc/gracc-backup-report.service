@@ -1,0 +1,16 @@
+[Unit]
+Description=GRACC Periodic Backup REport
+Documentation=https://opensciencegrid.github.io/gracc
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=root
+Group=root
+Type=oneshot
+ExecStart=/usr/bin/docker run --rm --net=host -v /etc/grid-security/gracc.opensciencegrid.org-cert.pem:/hostcert.pem -v /etc/grid-security/gracc.opensciencegrid.org-key.pem:/hostkey.pem  djw8605/gracc-email:add_backup_report run_backup_report gracc-project@opensciencegrid.org
+TimeoutStopSec=5min
+
+[Install]
+WantedBy=multi-user.target
+
