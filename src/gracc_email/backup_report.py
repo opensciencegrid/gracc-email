@@ -80,7 +80,7 @@ def main():
 
     summary_text = ""
     detailed_text = []
-    headers = ["Directory", "Bytes in Last Week", 'Delta from Last Week']
+    headers = ["Directory", "Bytes in Last Week", "Bytes in Previous Week", 'Delta from Previous Week']
 #    toReturn +=  "Records by Probe:\n"
 
     data = []
@@ -88,7 +88,7 @@ def main():
     detailed_files = ""
     for directory in config['directories']:
         results = parse_dir(directory)
-        data.append([directory, sizeof_fmt(results['total_size']), "%.2f%%" % ((float(results['total_size'] - results['old_total_size']) / max(results['total_size'], 1)) * 100)])
+        data.append([directory, sizeof_fmt(results['total_size']), sizeof_fmt(results['old_total_size']), "%+.2f%%" % ((float(results['total_size'] - results['old_total_size']) / max(results['total_size'], 1)) * 100)])
         total_backed_up += results['total_size']
         detailed_files += "Directory: %s\n" % directory
         file_header = ["Filename", "Size"]
