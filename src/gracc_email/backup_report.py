@@ -89,9 +89,6 @@ def main():
     for directory in config['directories']:
         results = parse_dir(directory)
         percent_change = (float(results['total_size'] - results['old_total_size']) / max(results['old_total_size'], 1)) * 100
-        if percent_change < 0:
-            percent_change = (float(results['old_total_size'] - results['total_size']) / max(results['old_total_size'], 1)) * 100
-        
         data.append([directory, sizeof_fmt(results['total_size']), sizeof_fmt(results['old_total_size']), "%+.2f%%" % percent_change])
         total_backed_up += results['total_size']
         detailed_files += "Directory: %s\n" % directory
