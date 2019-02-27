@@ -1,6 +1,6 @@
-FROM opensciencegrid/osg-wn:3.4-el6
+FROM opensciencegrid/osg-wn:3.4-el7
 
-RUN yum -y install python-setuptools
+RUN yum -y install python-pip python-setuptools &&  pip install --upgrade setuptools pip
 
 ADD test.toml /test.toml
 
