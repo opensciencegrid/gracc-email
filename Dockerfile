@@ -1,4 +1,4 @@
-FROM opensciencegrid/osg-wn:3.4-el7
+FROM opensciencegrid/osg-wn:3.5
 
 RUN yum -y install python-pip python-setuptools &&  pip install --upgrade setuptools pip
 
