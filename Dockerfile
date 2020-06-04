@@ -1,6 +1,6 @@
 FROM opensciencegrid/osg-wn:3.5
 
-RUN yum -y install python-pip python-setuptools &&  pip install --upgrade setuptools pip
+RUN yum -y install python-pip python-setuptools &&  pip install --upgrade 'setuptools<=45' pip
 
 ADD test.toml /test.toml
 
