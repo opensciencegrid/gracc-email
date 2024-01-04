@@ -1,56 +1,7 @@
 GRACC Collector Email Report
 ============================
 
-The GRACC email reports generate readable status notifications of the GRACC collector.
-
-
-Installation
-------------
-
-Install required packages in a virtualenv:
-```
-$ virtuanenv gracc-venv
-$ . gracc-venv/bin/activate
-$ pip install -r requirements.txt
-```
-
-Running GRACC-Email
--------------------
-
-Run the `report.py` script with the emails as the command line arguments:
-```
-$ src/report.py <email> <email>
-```
-
-The output from running will arrive in email.  It will appear as:
-```
-Total records:
-+-------------+---------+---------+
-|   Yesterday |   Today | Delta   |
-+=============+=========+=========+
-|      972818 | 1104047 | -11.89% |
-+-------------+---------+---------+
----------------------------------------------------------------------------
-Records by Probe:
-+--------------------------------------------------+---------------------+-----------------+-------------+
-| ProbeName                                        |   Yesterday Records |   Today Records | Delta       |
-+==================================================+=====================+=================+=============+
-| condor:sub-1.icecube.wisc.edu                    |               11128 |            5970 | -46.35%     |
-+--------------------------------------------------+---------------------+-----------------+-------------+
-| pbs:carter-osg.rcac.purdue.edu                   |                 540 |             339 | -37.22%     |
-+--------------------------------------------------+---------------------+-----------------+-------------+
-| gridftp-transfer:top.ucr.edu                     |                 120 |             112 | -6.67%      |
-+--------------------------------------------------+---------------------+-----------------+-------------+
-| lsf:osgserv01.slac.stanford.edu                  |               16961 |           16542 | -2.47%      |
-+--------------------------------------------------+---------------------+-----------------+-------------+
-| gridftp-transfer:gluskap.phys.uconn.edu          |                 279 |             554 | +98.57%     |
-+--------------------------------------------------+---------------------+-----------------+-------------+
-| pbs:cms.rc.ufl.edu                               |                  18 |               0 | -100.00%    |
-+--------------------------------------------------+---------------------+-----------------+-------------+
-| condor:cit-gatekeeper2.ultralight.org            |                 672 |             433 | -35.57%     |
-
-...
-```
+The GRACC email reports generate readable status notifications of the GRACC backup.
 
 
 GRACC Backup Report
