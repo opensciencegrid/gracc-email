@@ -27,7 +27,7 @@ class Directory:
 		self.parse()
 
 	def to_array(self):
-		return [self.path, self.size, self.old_size, self.percent_change]
+		return [self.path, sizeof_fmt(self.size), sizeof_fmt(self.old_size), self.percent_change]
 
 	def parse(self):
 		how_old = 7
@@ -54,7 +54,7 @@ class Directory:
 			if mtime > (datetime.datetime.now() - datetime.timedelta(days=how_old)):
 				total_size += st.st_size
 				total_files += 1
-				self.files.append({'filename': dirent.d_name, 'size': st.st_size})
+				self.files.append({'filename': dirent.d_name, 'size': sizeof_fmt(st.st_size)})
 			if mtime < (datetime.datetime.now() - datetime.timedelta(days=how_old)) and mtime > (datetime.datetime.now() - datetime.timedelta(days=how_old*2)):
 				old_total_size += st.st_size
 		self.size = total_size
