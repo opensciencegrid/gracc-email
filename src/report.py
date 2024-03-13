@@ -5,7 +5,7 @@ from email.mime.text import MIMEText
 import argparse
 import stat
 import datetime
-import json
+import os
 
 def sizeof_fmt(num, suffix='B'):
 	for unit in ['','Ki','Mi','Gi','Ti','Pi','Ei','Zi']:
@@ -104,9 +104,8 @@ def main():
 	msg['Subject'] = subject
 	from_address = "gracc-support@ops.osg-htc.org"
 	msg['From'] = from_address
-	smtp_config = json.load(open("smtp-config.json"))
-	s = smtplib.SMTP_SSL(host=smtp_config['host'], port=smtp_config['port'])
-	s.login(user=smtp_config['user'], password=smtp_config['password'])
+	s = smtplib.SMTP_SSL(host=os.environ['SMTP_HOST'], port=os.environ['SMTP_PORT'])
+	s.login(user=os.environ['SMTP_USER'], password=os.environ['SMTP_PASSWORD'])
 
 	for email in args.emails:
 		msg['To'] = email

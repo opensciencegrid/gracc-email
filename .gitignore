@@ -1,2 +1,4 @@
 old
 src/smtp-config.json
+hostcert.pem
+hostkey.pem
