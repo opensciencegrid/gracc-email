@@ -1,11 +1,8 @@
-FROM opensciencegrid/osg-wn:3.5
-
-RUN yum -y install python-pip python-setuptools &&  pip install --upgrade 'setuptools<=45' pip
-
-ADD test.toml /test.toml
-
-ADD . /gracc-email
-WORKDIR /gracc-email
-RUN python setup.py install
-
-
+FROM opensciencegrid/software-base:23-el9-release
+RUN dnf update -y
+RUN dnf install -y python3-gfal2 gfal2-plugin-gridftp
+RUN export ENABLE_SHA1=1
+COPY src/* /app/
+WORKDIR /app
+RUN pip3 install -r requirements.txt
+ENTRYPOINT ["python3", "report.py"]

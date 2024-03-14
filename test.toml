@@ -1,1 +1,0 @@
-directories = [ "gsiftp://fndca1.fnal.gov/pnfs/fs/usr/fermigrid/gratia/gracc-jobs-raw/", "gsiftp://fndca1.fnal.gov/pnfs/fs/usr/fermigrid/gratia/gracc-ps-raw/", "gsiftp://fndca1.fnal.gov/pnfs/fs/usr/fermigrid/gratia/gracc-transfers-raw/", "gsiftp://fndca1.fnal.gov/pnfs/fs/usr/fermigrid/gratia/gracc-ps-itb-raw/" ]
